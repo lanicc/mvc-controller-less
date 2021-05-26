@@ -1,0 +1,14 @@
+GET http://localhost:8080/TestService/echo?s=3
+
+
+
+
+###
+
+GET http://localhost:8080/TestService/echo1
+Content-Type: application/json
+
+{
+  "name": "lan",
+  "age": "12"
+}
