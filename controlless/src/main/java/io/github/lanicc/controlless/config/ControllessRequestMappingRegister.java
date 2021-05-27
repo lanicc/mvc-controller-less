@@ -1,13 +1,12 @@
 package io.github.lanicc.controlless.config;
 
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.Collection;
-import java.util.stream.Stream;
 
 /**
  * Created on 2021/5/26.
@@ -30,11 +29,13 @@ public class ControllessRequestMappingRegister {
     private void addMapping(Object bean) {
         Class<?> beanClass = bean.getClass();
         String simpleName = beanClass.getSimpleName();
-
-        Stream.of(beanClass.getDeclaredMethods())
-                .filter(method -> Modifier.isPublic(method.getModifiers()))
-                .filter(method -> !"getPrimaryKeyPrefix,getDao,getDtoMapper,getObjectNotExistError,getInsertOperateFailedError,getUpdateOperateFailedError".contains(method.getName()))
-                .forEach(method -> addMapping(bean, simpleName, method));
+        Class<?>[] interfaces = ClassUtils.getAllInterfacesForClass(beanClass);
+        for (Class<?> itf : interfaces) {
+            Method[] methods = itf.getDeclaredMethods();
+            for (Method method : methods) {
+                addMapping(bean, simpleName, method);
+            }
+        }
     }
 
     private void addMapping(Object bean, String className, Method method) {
