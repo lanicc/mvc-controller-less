@@ -33,6 +33,7 @@ public class ControllessRequestMappingRegister {
 
         Stream.of(beanClass.getDeclaredMethods())
                 .filter(method -> Modifier.isPublic(method.getModifiers()))
+                .filter(method -> !"getPrimaryKeyPrefix,getDao,getDtoMapper,getObjectNotExistError,getInsertOperateFailedError,getUpdateOperateFailedError".contains(method.getName()))
                 .forEach(method -> addMapping(bean, simpleName, method));
     }
 
@@ -45,6 +46,7 @@ public class ControllessRequestMappingRegister {
                         .methods(RequestMethod.GET, RequestMethod.POST)
                         .build();
         mapping.registerMapping(info, bean, method);
+        System.err.printf("ControllessRequestMappingRegister register request mapping, bean class : %s, method: %s, path: %s, http method: %s\n", className, name, path, "GET,POST");
     }
 
 
