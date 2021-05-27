@@ -4,12 +4,26 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.lanicc</groupId>
   <artifactId>controlless</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
 
   <packaging>jar</packaging>
   <name>controlless</name>
   <url>https://github.com/lanicc/mvc-controller-less</url>
-  <description>Automatically expose service in Spring as HTTP interface</description>
+  <description>Automatically expose server ice in Spring as HTTP interface.</description>
+
+  <licenses>
+    <license>
+      <name>Server Side Public License</name>
+      <url>https://www.mongodb.com/licensing/server-side-public-license</url>
+      <distribution>repo</distribution>
+      <comments>A not business-friendly OSS license</comments>
+    </license>
+  </licenses>
+  <scm>
+    <url>https://github.com/lanicc/mvc-controller-less</url>
+    <connection>https://github.com/lanicc/mvc-controller-less.git</connection>
+  </scm>
+
 
   <properties>
     <java.version>1.8</java.version>
@@ -82,11 +96,11 @@
       <distributionManagement>
         <snapshotRepository>
           <id>ossrh</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+          <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
           <id>ossrh</id>
-          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+          <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
       </distributionManagement>
     </profile>
