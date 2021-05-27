@@ -1,4 +1,4 @@
-package org.lanicc.controlless.config;
+package io.github.lanicc.controlless.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

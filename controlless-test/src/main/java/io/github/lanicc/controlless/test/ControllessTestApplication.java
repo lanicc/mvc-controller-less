@@ -1,6 +1,6 @@
-package org.lanicc.controlless.test;
+package io.github.lanicc.controlless.test;
 
-import org.lanicc.controlless.annotation.EnableControlless;
+import io.github.lanicc.controlless.annotation.EnableControlless;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

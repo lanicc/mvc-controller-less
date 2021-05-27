@@ -1,6 +1,6 @@
-package org.lanicc.controlless.annotation;
+package io.github.lanicc.controlless.annotation;
 
-import org.lanicc.controlless.config.RequestMappingHandlerAdapterConfig;
+import io.github.lanicc.controlless.config.RequestMappingHandlerAdapterConfig;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

@@ -1,4 +1,4 @@
-package org.lanicc.controlless.config;
+package io.github.lanicc.controlless.config;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;

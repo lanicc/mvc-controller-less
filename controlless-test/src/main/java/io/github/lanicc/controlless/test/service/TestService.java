@@ -1,4 +1,4 @@
-package org.lanicc.controlless.test.service;
+package io.github.lanicc.controlless.test.service;
 
 import org.springframework.stereotype.Service;
 
