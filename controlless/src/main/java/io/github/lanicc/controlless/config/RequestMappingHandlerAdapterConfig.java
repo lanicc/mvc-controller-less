@@ -32,11 +32,10 @@ public class RequestMappingHandlerAdapterConfig {
     }
 
     @Autowired
-    public void initMappingHandlerAdapter(RequestMappingHandlerAdapter requestMappingHandlerAdapter) {
-        ControllessMethodArgumentReturnValueHandler resolverAndReturnValueHandler = new ControllessMethodArgumentReturnValueHandler(requestMappingHandlerAdapter);
+    public void initMappingHandlerAdapter(RequestMappingHandlerAdapter requestMappingHandlerAdapter, ApplicationContext applicationContext) {
+        ControllessMethodArgumentReturnValueHandler resolverAndReturnValueHandler = new ControllessMethodArgumentReturnValueHandler(requestMappingHandlerAdapter, applicationContext);
         requestMappingHandlerAdapter.setReturnValueHandlers(Collections.singletonList(resolverAndReturnValueHandler));
         requestMappingHandlerAdapter.setArgumentResolvers(Collections.singletonList(resolverAndReturnValueHandler));
     }
-
 
 }

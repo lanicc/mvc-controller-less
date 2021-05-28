@@ -12,15 +12,25 @@ import java.util.Map;
  * @since 1.0
  */
 @Service
-public class TestService {
+public class TestService implements ITestService {
 
-    public void echo(String s) {
-        System.out.println("ssss: " + s);
+    @Override
+    public String call(String name) {
+        System.out.println("name: " + name);
+        return "call me baby: " + name;
     }
 
-    public Map<String, String> echo1(Map<String, String> map) {
+    @Override
+    public Map<String, Object> haha(Map<String, Object> map) {
         System.out.println(map);
         map.put("time", LocalDateTime.now().toString());
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> haha2(Map<String, Object> map, String name) {
+        System.out.println("name: " + name + ", map: " + map);
+        map.put("name", name);
         return map;
     }
 }

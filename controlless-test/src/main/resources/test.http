@@ -1,14 +1,19 @@
-GET http://localhost:8080/TestService/echo?s=3
-
-
-
+GET http://localhost:8080/TestService/call?name=21
 
 ###
-
-GET http://localhost:8080/TestService/echo1
+GET http://localhost:8080/TestService/haha
 Content-Type: application/json
 
 {
-  "name": "lan",
-  "age": "12"
+  "author": "lanicc"
+}
+
+
+###
+GET http://localhost:8080/TestService/haha2?name=lanicc
+Content-Type: application/json
+
+{
+  "author": "lanicc",
+  "call": 1111
 }

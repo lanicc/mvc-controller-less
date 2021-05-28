@@ -1,6 +1,7 @@
 package io.github.lanicc.controlless.config;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
 import java.lang.reflect.Executable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created on 2021/5/26.
@@ -28,10 +31,13 @@ public class ControllessMethodArgumentReturnValueHandler implements HandlerMetho
     private final List<HandlerMethodArgumentResolver> argumentResolvers;
     private final ServiceRequestResponseBodyMethodProcessor serviceRequestResponseBodyMethodProcessor;
 
-    public ControllessMethodArgumentReturnValueHandler(RequestMappingHandlerAdapter requestMappingHandlerAdapter) {
+    private final ApplicationContext applicationContext;
+
+    public ControllessMethodArgumentReturnValueHandler(RequestMappingHandlerAdapter requestMappingHandlerAdapter, ApplicationContext applicationContext) {
         this.returnValueHandlers = requestMappingHandlerAdapter.getReturnValueHandlers();
         this.argumentResolvers = requestMappingHandlerAdapter.getArgumentResolvers();
         this.serviceRequestResponseBodyMethodProcessor = new ServiceRequestResponseBodyMethodProcessor(requestMappingHandlerAdapter.getMessageConverters());
+        this.applicationContext = applicationContext;
     }
 
     @Override
@@ -77,7 +83,12 @@ public class ControllessMethodArgumentReturnValueHandler implements HandlerMetho
     }
 
     private boolean isService(Executable executable) {
-        return executable.getDeclaringClass().isAnnotationPresent(Service.class);
+        Map<String, Object> beans = applicationContext.getBeansWithAnnotation(Service.class);
+        Class<?> declaringClass = executable.getDeclaringClass();
+        Map<String, ?> beansOfType = applicationContext.getBeansOfType(declaringClass);
+        HashSet<?> objects = new HashSet<>(beansOfType.values());
+        return beans.values().stream()
+                .anyMatch(objects::contains);
     }
 
     private Object resolveArgument(HandlerMethodArgumentResolver handlerMethodArgumentResolver, MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
