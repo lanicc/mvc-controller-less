@@ -9,7 +9,7 @@
   <packaging>jar</packaging>
   <name>controlless</name>
   <url>https://github.com/lanicc/mvc-controller-less</url>
-  <description>Automatically expose server ice in Spring as HTTP interface.</description>
+  <description>Automatically expose service in Spring as HTTP interface.</description>
 
   <licenses>
     <license>
