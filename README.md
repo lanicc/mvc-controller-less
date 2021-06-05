@@ -1,28 +1,33 @@
 # mvc-controller-less
 不需要写controller，直接暴露service为http接口
 
+## 使用
 
-使用
+### 添加maven依赖
+
+````xml
+
+<dependency>
+    <groupId>io.github.lanicc</groupId>
+    <artifactId>controlless-springboot-starter</artifactId>
+    <version>1.0.1</version>
+</dependency>
 
 ````
 
-    <dependency>
-      <groupId>io.github.lanicc</groupId>
-      <artifactId>controlless</artifactId>
-      <version>0.0.1</version>
-    </dependency>
-    
-    
-    
-    <repository>
-      <id>sonatype</id>
-      <url>https://s01.oss.sonatype.org/content/groups/public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
+
+### 注解开启
+
+````java
+
+@EnableControlless
+@SpringBootApplication
+public class XxApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(XxApplication.class, args);
+    }
+
+}
 
 ````
