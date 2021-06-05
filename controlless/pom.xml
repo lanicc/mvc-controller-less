@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.lanicc</groupId>
   <artifactId>controlless-springboot-starter</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.2</version>
 
   <packaging>jar</packaging>
   <name>controlless</name>
