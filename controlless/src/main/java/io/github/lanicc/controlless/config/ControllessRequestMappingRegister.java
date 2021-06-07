@@ -1,5 +1,6 @@
 package io.github.lanicc.controlless.config;
 
+import org.springframework.aop.support.AopUtils;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
@@ -27,7 +28,7 @@ public class ControllessRequestMappingRegister {
     }
 
     private void addMapping(Object bean) {
-        Class<?> beanClass = bean.getClass();
+        Class<?> beanClass = AopUtils.getTargetClass(bean);
         String simpleName = beanClass.getSimpleName();
         Class<?>[] interfaces = ClassUtils.getAllInterfacesForClass(beanClass);
         for (Class<?> itf : interfaces) {
