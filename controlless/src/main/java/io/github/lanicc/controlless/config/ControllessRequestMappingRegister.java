@@ -33,21 +33,21 @@ public class ControllessRequestMappingRegister {
         for (Class<?> itf : interfaces) {
             Method[] methods = itf.getDeclaredMethods();
             for (Method method : methods) {
-                addMapping(bean, simpleName, method);
+                addMapping(itf.getSimpleName(), bean, simpleName, method);
             }
         }
     }
 
-    private void addMapping(Object bean, String className, Method method) {
+    private void addMapping(String itfName, Object bean, String className, Method method) {
         String name = method.getName();
-        String path = "/" + className + "/" + name;
+        String path = "/" + itfName + "/" + name;
         RequestMappingInfo info =
                 RequestMappingInfo
                         .paths(path)
                         .methods(RequestMethod.GET, RequestMethod.POST)
                         .build();
         mapping.registerMapping(info, bean, method);
-        System.err.printf("ControllessRequestMappingRegister register request mapping, bean class : %s, method: %s, path: %s, http method: %s\n", className, name, path, "GET,POST");
+        System.err.printf("ControllessRequestMappingRegister register request mapping, bean class : %s, method: %s, path: %s, http method: %s\n", itfName, name, path, "GET,POST");
     }
 
 
