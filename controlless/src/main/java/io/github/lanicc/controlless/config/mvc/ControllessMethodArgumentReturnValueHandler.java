@@ -1,4 +1,4 @@
-package io.github.lanicc.controlless.config;
+package io.github.lanicc.controlless.config.mvc;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationContext;
