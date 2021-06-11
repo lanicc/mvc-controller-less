@@ -16,4 +16,9 @@ import java.lang.annotation.*;
 @Documented
 @Import(RequestMappingHandlerAdapterConfig.class)
 public @interface EnableControlless {
+
+    boolean dubbo() default false;
+
+    boolean mvc() default true;
+
 }

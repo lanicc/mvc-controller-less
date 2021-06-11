@@ -1,39 +1,41 @@
-package io.github.lanicc.controlless.config;
+package io.github.lanicc.controlless.config.mvc;
 
+import io.github.lanicc.controlless.config.ControllessAbstractRegister;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.lang.reflect.Method;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * Created on 2021/5/26.
+ * Created on 2021/6/7.
  *
  * @author lan
- * @since 1.0
+ * @since 2.0.0
  */
-public class ControllessRequestMappingRegister {
+@Slf4j
+public class MvcRegister extends ControllessAbstractRegister {
+    private RequestMappingHandlerMapping mapping;
 
-    private final RequestMappingHandlerMapping mapping;
-
-    public ControllessRequestMappingRegister(RequestMappingHandlerMapping mapping) {
+    public MvcRegister(RequestMappingHandlerMapping mapping) {
         this.mapping = mapping;
     }
 
-    public void register(Collection<?> mappingBeans) {
-        mappingBeans.forEach(this::addMapping);
-    }
-
-    private void addMapping(Object bean) {
-        Class<?> beanClass = bean.getClass();
-        String simpleName = beanClass.getSimpleName();
-        Class<?>[] interfaces = ClassUtils.getAllInterfacesForClass(beanClass);
+    @Override
+    public void register(Class<?> clazz, Object bean) {
+        String simpleName = clazz.getSimpleName();
+        Class<?>[] interfaces = ClassUtils.getAllInterfacesForClass(clazz);
+        Set<String> methodSet = new HashSet<>();
         for (Class<?> itf : interfaces) {
             Method[] methods = itf.getDeclaredMethods();
             for (Method method : methods) {
-                addMapping(bean, simpleName, method);
+                if (methodSet.add(method.getName())) {
+                    addMapping(bean, simpleName, method);
+                }
             }
         }
     }
